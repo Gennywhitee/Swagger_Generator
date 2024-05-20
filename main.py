@@ -49,7 +49,7 @@ if __name__ == "__main__":
     file_out = ".\\output\\file1.txt"
     file_in = ".\\input\\Biblioteca.java"
     print(text_from_file(file_in))
-    #out_on_file(generate_swagger(file_in),file_out)
+    out_on_file(generate_swagger(file_in),file_out)
 
 
 
