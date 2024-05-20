@@ -7,6 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from contextlib import redirect_stdout
 
 from langchain.agents import tool
+import yaml
 
 
 
@@ -27,12 +28,12 @@ def generate_pet_name(animal_type, pet_color):
 
 def generate_swagger(filename):
     text = text_from_file(filename)
-    prompt = ChatPromptTemplate.from_template("Creami lo swagger della seguente classe in Java, seguendo lo standard OPENAI 3.0. Non scrivere altri commenti\n\n"+ text)
+    prompt = ChatPromptTemplate.from_template("Creami un file .YML della seguente classe in Java: {text}, seguendo lo standard OPENAI 3.0. Non scrivere altri commenti.")
     output_parser = StrOutputParser()
 
     chain =  prompt | model | output_parser
 
-    response = chain.invoke({})
+    response = chain.invoke({"text" :text})
     return response
 
 def text_from_file(filename):
@@ -40,15 +41,13 @@ def text_from_file(filename):
             contenuto = f.read()
     return contenuto
 
-def out_on_file(data,file_path):
-    with open(file_path,'x') as f:
-        with redirect_stdout(f):
-            print(data)
+def out_on_file(data, file_path):
+    with open(file_path, 'w') as f:
+        f.write(data)
 
 if __name__ == "__main__":
-    file_out = ".\\output\\file1.txt"
+    file_out = ".\\output\\file1.yml"
     file_in = ".\\input\\Biblioteca.java"
-    print(text_from_file(file_in))
     out_on_file(generate_swagger(file_in),file_out)
 
 
