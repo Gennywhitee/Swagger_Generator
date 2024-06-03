@@ -1,4 +1,3 @@
-from pathlib import Path
 from langchain_openai import ChatOpenAI 
 from langchain_core.prompts import PromptTemplate 
 from dotenv import load_dotenv 
@@ -11,7 +10,7 @@ model = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.7)
 
 def generate_swagger(filename):
     text = text_from_file(filename)
-    prompt = ChatPromptTemplate.from_template("Creami un file .YML della seguente classe in Java: {text}, seguendo lo standard OPENAI 3.0. Non scrivere altri commenti.")
+    prompt = ChatPromptTemplate.from_template("Creami la documentazione dello Swagger, con annesse le operazioni CRUD in maniera tale che possano essere richiamate come API RESTfull, della seguente classe Entity: {text}.\n Segui sempre lo standard OPENAI 3.0 per la creazione di Swagger. Non scrivere altri commenti.")
     output_parser = StrOutputParser()
 
     chain =  prompt | model | output_parser
@@ -29,8 +28,8 @@ def out_on_file(data, file_path):
         f.write(data)
 
 if __name__ == "__main__":
-    file_out = ".\\output\\file1.yml"
-    file_in = ".\\input\\Biblioteca.java"
+    file_out = ".\\output\\User_feed2.yml"
+    file_in = ".\\input\\User_feed.java"
     out_on_file(generate_swagger(file_in),file_out)
 
 

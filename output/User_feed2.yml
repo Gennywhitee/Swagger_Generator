@@ -1,0 +1,159 @@
+```java
+/**
+ * @swagger
+ * definitions:
+ *   Post:
+ *     type: object
+ *     properties:
+ *       userId:
+ *         type: integer
+ *       isRepost:
+ *         type: boolean
+ *       dateCreated:
+ *         type: string
+ *         format: date-time
+ *       poll:
+ *         type: string
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Get all posts
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: array
+ *           items:
+ *             $ref: '#/definitions/Post'
+ *   post:
+ *     summary: Create a new post
+ *     parameters:
+ *       - name: post
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/Post'
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Post'
+ * 
+ * /posts/{userId}:
+ *   get:
+ *     summary: Get a post by userId
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Post'
+ *   put:
+ *     summary: Update a post by userId
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: post
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/Post'
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Post'
+ *   delete:
+ *     summary: Delete a post by userId
+ *     parameters:
+ *       - name: userId
+ *         in: path
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+@RestController
+@RequestMapping("/posts")
+public class PostController {
+
+    @Autowired
+    private PostService postService;
+
+    @GetMapping
+    public List<Post> getAllPosts() {
+        return postService.getAllPosts();
+    }
+
+    @GetMapping("/{userId}")
+    public Post getPostByUserId(@PathVariable long userId) {
+        return postService.getPostByUserId(userId);
+    }
+
+    @PostMapping
+    public Post createPost(@RequestBody Post post) {
+        return postService.createPost(post);
+    }
+
+    @PutMapping("/{userId}")
+    public Post updatePost(@PathVariable long userId, @RequestBody Post post) {
+        return postService.updatePost(userId, post);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deletePost(@PathVariable long userId) {
+        postService.deletePost(userId);
+    }
+}
+
+@Service
+public class PostService {
+
+    @Autowired
+    private PostRepository postRepository;
+
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+
+    public Post getPostByUserId(long userId) {
+        return postRepository.findByUserId(userId);
+    }
+
+    public Post createPost(Post post) {
+        return postRepository.save(post);
+    }
+
+    public Post updatePost(long userId, Post post) {
+        Post existingPost = postRepository.findByUserId(userId);
+        if (existingPost != null) {
+            post.setUserId(userId);
+            return postRepository.save(post);
+        }
+        return null;
+    }
+
+    public void deletePost(long userId) {
+        Post existingPost = postRepository.findByUserId(userId);
+        if (existingPost != null) {
+            postRepository.delete(existingPost);
+        }
+    }
+}
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+
+    Post findByUserId(long userId);
+
+}
+```

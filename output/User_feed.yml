@@ -1,0 +1,134 @@
+```java
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+@Table(name="user_feed")
+public class Post implements Serializable {
+
+    @Id
+    @Column(name="user_id")
+    private long mUserId;
+
+    @Column(name="is_repost")
+    private boolean mIsRepost;
+
+    @Column(name="date_created")
+    private Date mDateCreated;
+
+    @Column(name="mPoll")
+    private String mPoll;
+
+    // Getter and Setter methods for the fields
+
+}
+```
+
+```java
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/posts")
+public class PostController {
+
+    @PostMapping("/")
+    public void createPost(@RequestBody Post post) {
+        // Create new post
+    }
+
+    @GetMapping("/{userId}")
+    public Post getPost(@PathVariable long userId) {
+        // Get post by user ID
+        return null;
+    }
+
+    @PutMapping("/")
+    public void updatePost(@RequestBody Post post) {
+        // Update existing post
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deletePost(@PathVariable long userId) {
+        // Delete post by user ID
+    }
+
+}
+```
+
+Swagger Documentation:
+```
+openapi: 3.0.0
+info:
+  title: User Feed API
+  version: 1.0.0
+paths:
+  /posts/:
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: Update an existing post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: OK
+  /posts/{userId}:
+    get:
+      summary: Get a post by user ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    delete:
+      summary: Delete a post by user ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        mUserId:
+          type: integer
+        mIsRepost:
+          type: boolean
+        mDateCreated:
+          type: string
+          format: date-time
+        mPoll:
+          type: string
+```
