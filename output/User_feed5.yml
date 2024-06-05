@@ -1,0 +1,99 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: User Feed API
+  version: 1.0.0
+paths:
+  /user_feed:
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                is_repost:
+                  type: boolean
+                date_created:
+                  type: string
+                  format: date-time
+                poll:
+                  type: string
+      responses:
+        '200':
+          description: Post created successfully
+        '400':
+          description: Invalid input
+  /user_feed/{post_id}:
+    get:
+      summary: Get post by ID
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                  is_repost:
+                    type: boolean
+                  date_created:
+                    type: string
+                    format: date-time
+                  poll:
+                    type: string
+        '404':
+          description: Post not found
+    put:
+      summary: Update an existing post
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_repost:
+                  type: boolean
+                date_created:
+                  type: string
+                  format: date-time
+                poll:
+                  type: string
+      responses:
+        '200':
+          description: Post updated successfully
+        '400':
+          description: Invalid input
+    delete:
+      summary: Delete a post
+      parameters:
+        - in: path
+          name: post_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post deleted successfully
+        '404':
+          description: Post not found
+```
