@@ -1,0 +1,60 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: User Feed API
+  version: 1.0.0
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Poll'
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        mUserId:
+          type: integer
+          format: int64
+        mIsRepost:
+          type: boolean
+        mDateCreated:
+          type: string
+          format: date-time
+        mPoll:
+          $ref: '#/components/schemas/Poll'
+    Poll:
+      type: object
+      properties:
+        mId:
+          type: integer
+          format: int64
+        mUserId:
+          type: integer
+          format: int64
+        mQuestion:
+          type: string
+        mDateCreated:
+          type: string
+          format: date-time
+```

@@ -1,0 +1,69 @@
+Ecco la documentazione Swagger per i due entity bean forniti:
+
+```yaml
+openapi: 3.0.0
+info:
+  title: Entity Bean API
+  version: 1.0.0
+  description: API per gestire i dati degli entity bean Post e Poll
+servers:
+  - url: http://localhost:8080
+paths:
+  /posts:
+    get:
+      summary: Recupera tutti i post
+      responses:
+        '200':
+          description: Elenco di tutti i post
+    post:
+      summary: Crea un nuovo post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post creato con successo
+  /posts/{postId}:
+    get:
+      summary: Recupera un singolo post per ID
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dettagli del post richiesto
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        poll:
+          $ref: '#/components/schemas/Poll'
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        question:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+```
+
+Questa documentazione Swagger definisce un'API per gestire i dati degli entity bean Post e Poll. Include operazioni CRUD per i post e definizioni dei modelli di dati per entrambi gli entity bean. Puoi utilizzare questa documentazione per creare i tuoi endpoint API e utilizzare gli entity bean in un'applicazione Java.

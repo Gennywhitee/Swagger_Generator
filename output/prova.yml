@@ -1,0 +1,190 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: Post and Poll API
+  version: 1.0.0
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /posts/{postId}:
+    get:
+      summary: Get a specific post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+          description: ID of the post to retrieve
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    put:
+      summary: Update a post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+          description: ID of the post to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    delete:
+      summary: Delete a post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+          description: ID of the post to delete
+      responses:
+        '204':
+          description: Post deleted successfully
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Poll'
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '201':
+          description: Poll created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+  /polls/{pollId}:
+    get:
+      summary: Get a specific poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to retrieve
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+    put:
+      summary: Update a poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Poll updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+    delete:
+      summary: Delete a poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to delete
+      responses:
+        '204':
+          description: Poll deleted successfully
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        poll:
+          $ref: '#/components/schemas/Poll'
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        question:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+```
+In questo documento Swagger/OpenAPI 3.0 sono definiti i path e le operazioni CRUD per le entità `Post` e `Poll`. Ogni entità ha i suoi endpoint per ottenere, creare, aggiornare e eliminare risorse. Le definizioni degli oggetti `Post` e `Poll` sono incluse nei componenti dello schema.
