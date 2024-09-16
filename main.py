@@ -1,38 +1,24 @@
-from pathlib import Path
-from langchain_openai import ChatOpenAI 
-from langchain_core.prompts import PromptTemplate 
-from dotenv import load_dotenv 
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-
-# Carica le variabili di ambiente da un file .env
-load_dotenv()
-model = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.7)
-
-def generate_swagger(filename):
-    text = text_from_file(filename)
-    prompt = ChatPromptTemplate.from_template("Creami uno swagger sottoforma di file .YML della seguente classe in Java, creandomi anche le operazioni CRUD: {text}, seguendo lo standard OPENAI 3.0.Le regole dello standard le trovi su questo sito: https://swagger.io/specification/ . Non scrivere altri commenti.")
-    output_parser = StrOutputParser()
-
-    chain =  prompt | model | output_parser
-
-    response = chain.invoke({"text" :text})
-    return response
-
-def text_from_file(filename):
-    with open(filename, 'r', encoding='utf-8') as f:
-            contenuto = f.read()
-    return contenuto
-
-def out_on_file(data, file_path):
-    with open(file_path, 'w') as f:
-        f.write(data)
+from  IO_function import *
+from  web_function import *
+from  swagger_generator import *
 
 if __name__ == "__main__":
-    file_in = ".\\input\\Entity_multiple.java"
-    file_out = ".\\output\\User_feed4.yml"
-    
-    out_on_file(generate_swagger(file_in),file_out)
+    url_innested = "https://swagger.io/docs/specification/data-models/inheritance-and-polymorphism/"
+    url_basic = "https://swagger.io/specification/"
+    file_in = "./input/Entity_innestate.java"
+    file_out = "./output/prova.yml"
+
+    text = text_from_file(file_in)
+
+    if check_nested_entities(text):
+        url = url_innested  # URL della specifica con innesti
+        context = extract_context_from_webpage(url)  # Estrae il contesto dalla specifica OpenAPI
+        
+    else:
+        url = url_basic  # URL della specifica
+        context = extract_context_from_webpage(url)
 
 
-
+    swagger_yaml = swagger_generator(file_in, context)  # Converte la classe Java in YAML
+    if swagger_yaml:
+        out_on_file(swagger_yaml, file_out)  # Scrive il YAML sul file di output

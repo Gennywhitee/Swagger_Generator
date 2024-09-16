@@ -1,0 +1,70 @@
+```yaml
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: User Feed API
+  description: API for managing user posts and polls
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /posts/{postId}:
+    get:
+      summary: Get a specific post
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          description: ID of the post
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: The ID of the user who created the post
+        isRepost:
+          type: boolean
+          description: Indicates if the post is a repost
+        dateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the post was created
+        poll:
+          $ref: '#/components/schemas/Poll'
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the poll
+        userId:
+          type: integer
+          description: The ID of the user who created the poll
+        question:
+          type: string
+          description: The question of the poll
+        dateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the poll was created
+```

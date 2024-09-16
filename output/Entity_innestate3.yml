@@ -1,0 +1,148 @@
+```yaml
+openapi: 3.0.0
+info:
+  title: CRUD API for User Feed
+  version: 1.0.0
+  description: API for managing user feed posts and polls
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Successful operation
+  /posts/{postId}:
+    get:
+      summary: Get a specific post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+    put:
+      summary: Update a post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete a post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Successful operation
+  /polls/{pollId}:
+    get:
+      summary: Get a specific poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+    put:
+      summary: Update a poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete a poll
+      parameters:
+        - in: path
+          name: pollId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        poll:
+          $ref: '#/components/schemas/Poll'
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        question:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+```
