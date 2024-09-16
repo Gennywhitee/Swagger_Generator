@@ -4,6 +4,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.output_parsers import StrOutputParser
 from IO_function import *
 from web_function import *
+from  YAML import *
 
 def check_nested_entities(java_code):
     # Analizza il codice Java per determinare la presenza di entity innestate
@@ -37,21 +38,27 @@ def swagger_generator(java_class_code, context):
             prompt = ChatPromptTemplate.from_template(
             "Creami la documentazione swagger dei seguenti entity bean in Java: {text},compresi tutti i metodi CRUD "
             "seguendo lo standard OPENAPI 3.0. Le regole dello standard le trovi qui: {context}. "
-            "IMPORTANTE Non scrivere altri commenti."
+            "IMPORTANTE: Non scrivere altri commenti o testo non legato alla documentazione YAML"
         )
         else:
             prompt = ChatPromptTemplate.from_template(
             "Creami la documentazione swagger del seguente entity bean in Java: {text},compresi tutti i metodi CRUD "
             "seguendo lo standard OPENAPI 3.0. Le regole dello standard le trovi qui: {context}. "
-            "IMPORTANTE Non scrivere altri commenti al di fuori della documentazione."
+            "IMPORTANTE: Non scrivere altri commenti o testo non legato alla documentazione YAML."
         )
         
         chain =  prompt | llm | output_parser  # Crea la catena di trasformazione
         response = chain.invoke({"text": chunk, "context": context})  # Invoca il modello con il chunk corrente e il contesto
         yaml_parts.append(response)  # Aggiunge la risposta alla lista delle parti YAML
+        
+        # Estrai solo il blocco YAML
+        validated_yaml = extract_yaml(response)
+        if validated_yaml:
+            yaml_parts.append(validated_yaml)
     
-    # Combina le parti del YAML in un'unica stringa
     final_yaml = "\n".join(yaml_parts)
+    out_on_file(final_yaml, "swagger_output.yaml")
+    
     return final_yaml
 
 

@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Poll and Post API
+  version: 1.0.0
+paths:
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Poll'
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Poll created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+  /polls/{id}:
+    get:
+      summary: Get a specific poll by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+    put:
+      summary: Update a specific poll by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Poll updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll'
+    delete:
+      summary: Delete a specific poll by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Poll deleted successfully
+  /posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+components:
+  schemas:
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        question:
+          type: string
+        date_created:
+          type: string
+          format: date
+    Post:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        is_repost:
+          type: boolean
+        date_created:
+          type: string
+          format: date
+        poll:
+          type: string
+openapi: 3.0.0
