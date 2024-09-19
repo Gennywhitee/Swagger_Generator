@@ -5,8 +5,8 @@ from  swagger_generator import *
 if __name__ == "__main__":
     url_innested = "https://swagger.io/docs/specification/data-models/inheritance-and-polymorphism/"
     url_basic = "https://swagger.io/specification/"
-    file_in = "./input/Entity_multiple.java"
-    file_out = "./output/Multiple_1.yml"
+    file_in = "./input/Entity_innestate_3.java"
+    file_out = "./output/innestate_3_1.yml"
 
     text = text_from_file(file_in)
 

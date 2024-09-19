@@ -36,16 +36,19 @@ def swagger_generator(java_class_code, context):
     for chunk in text_chunks:
         if check_nested_entities(text):
             prompt = ChatPromptTemplate.from_template(
-            "Creami la documentazione swagger dei seguenti entity bean in Java: {text},compresi tutti i metodi CRUD "
-            "seguendo lo standard OPENAPI 3.0. Le regole dello standard le trovi qui: {context}. "
-            "IMPORTANTE: Non scrivere altri commenti o testo non legato alla documentazione YAML"
+            "Genera **esclusivamente** la documentazione Swagger seguendo lo standard OpenAPI 3.0 per il seguente entity bean in Java: {text}. "
+            "Crea i metodi CRUD necessari, formattati correttamente in YAML, e non includere **nessun** testo che non faccia parte della documentazione Swagger. "
+            "Non includere commenti, spiegazioni o descrizioni aggiuntive. "
+            "La documentazione deve essere conforme alle regole dello standard che trovi qui: {context}. "
+            "IMPORTANTE: L'output deve essere puramente YAML, senza altri contenuti extra."
         )
         else:
             prompt = ChatPromptTemplate.from_template(
-            "Creami la documentazione swagger del seguente entity bean in Java: {text},compresi tutti i metodi CRUD "
-            "seguendo lo standard OPENAPI 3.0. Le regole dello standard le trovi qui: {context}. "
-            "IMPORTANTE: Non scrivere altri commenti o testo non legato alla documentazione YAML."
-        )
+            "Genera **esclusivamente** la documentazione Swagger seguendo lo standard OpenAPI 3.0 per il seguente entity bean in Java: {text}. "
+            "Crea i metodi CRUD necessari, formattati correttamente in YAML, e non includere **nessun** testo che non faccia parte della documentazione Swagger. "
+            "Non includere commenti, spiegazioni o descrizioni aggiuntive. "
+            "La documentazione deve essere conforme alle regole dello standard che trovi qui: {context}. "
+            "IMPORTANTE: L'output deve essere puramente YAML, senza altri contenuti extra.")
         
         chain =  prompt | llm | output_parser  # Crea la catena di trasformazione
         response = chain.invoke({"text": chunk, "context": context})  # Invoca il modello con il chunk corrente e il contesto
