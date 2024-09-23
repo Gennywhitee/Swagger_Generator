@@ -1,0 +1,22 @@
+{
+  "CommentClass": {
+    "dependencies": [
+      "PostClass"
+    ]
+  },
+  "PostClass": {
+    "dependencies": [
+      "PollClass",
+      "CommentClass",
+      "MyObjClass"
+    ]
+  },
+  "EntityClass": {},
+  "PollClass": {},
+  "ProgettoClass": {
+    "dependencies": [
+      "EntityClass",
+      "TaskClass"
+    ]
+  }
+}

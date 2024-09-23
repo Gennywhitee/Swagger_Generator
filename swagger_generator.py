@@ -4,7 +4,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.output_parsers import StrOutputParser
 from IO_function import *
 from web_function import *
-from  YAML import *
+from yaml_control import *
 
 def check_nested_entities(java_code):
     # Analizza il codice Java per determinare la presenza di entity innestate

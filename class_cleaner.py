@@ -1,8 +1,5 @@
 import re  
 import os  
-from langchain.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI 
-from langchain_core.output_parsers import StrOutputParser
 from IO_function import *  
 
 # Funzione per trovare e restituire solo le dipendenze dalle relazioni JPA
@@ -18,7 +15,7 @@ def extract_dependencies(java_code):
     # Per ogni corrispondenza trovata, creo una stringa che rappresenta la relazione
     for match in matches:
         relation_type, class_name, variable_name = match
-        dependencies.append(f'private {class_name} {variable_name};')
+        dependencies.append(f'{class_name} {variable_name};')
     
     return dependencies 
 

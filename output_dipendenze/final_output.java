@@ -1,7 +1,7 @@
 class Comment{ private Post post;}
 
 
-class Post{ private Poll mPoll; private List<Comment> comments;}
+class Post{ private Poll mPoll; private List<Comment> comments; MyObj genny}
 
 
 class EntityClass{}
@@ -10,4 +10,5 @@ class EntityClass{}
 class Poll{}
 
 
-class Post{}
+class ProgettoClass{ private EntityClass entityAssociata; private List<TaskClass> tasks;}
+
