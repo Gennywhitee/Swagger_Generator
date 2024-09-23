@@ -1,22 +1,17 @@
 {
   "CommentClass": {
-    "dependencies": [
-      "PostClass"
-    ]
+    "dependencies": []
   },
-  "PostClass": {
-    "dependencies": [
-      "PollClass",
-      "CommentClass",
-      "MyObjClass"
-    ]
+  "FriendClass": {
+    "dependencies": []
   },
-  "EntityClass": {},
-  "PollClass": {},
-  "ProgettoClass": {
-    "dependencies": [
-      "EntityClass",
-      "TaskClass"
-    ]
+  "ObjClass": {
+    "dependencies": ["UserClass"]
+  },
+  "PollClass": {
+    "dependencies": ["ObjClass", "CommentClass"]
+  },
+  "UserClass": {
+    "dependencies": ["FriendClass"]
   }
 }

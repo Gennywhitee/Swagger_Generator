@@ -16,9 +16,4 @@ public class Comment implements Serializable {
     @Column(name="date_created")
     private Date mDateCreated;
 
-    // Relazione ManyToOne con Post
-    @ManyToOne
-    @JoinColumn(name="post_id", nullable = false)
-    private Post post;
-
 }

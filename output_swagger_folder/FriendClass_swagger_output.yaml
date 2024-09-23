@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Friend API
+  version: 1.0.0
+paths:
+  /friends:
+    get:
+      summary: Get all friends
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Add a new friend
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Friend added successfully
+  /friends/{userId}:
+    get:
+      summary: Get friend by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+    put:
+      summary: Update friend by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Friend updated successfully
+    delete:
+      summary: Delete friend by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Friend deleted successfully

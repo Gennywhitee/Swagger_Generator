@@ -15,4 +15,14 @@ public class Poll implements Serializable {
 
     @Column(name="date_created")
     private Date mDateCreated;
+    
+    @OneToOne
+    @JoinColumn(name="Obj_id")
+    private Obj mObj;
+
+    @OneToOne
+    @JoinColumn(name="comment")
+    private Comment commento;
+
+
 }

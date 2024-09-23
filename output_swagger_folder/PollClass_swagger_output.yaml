@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Poll API
+  version: 1.0.0
+paths:
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Successful response
+  /polls/{id}:
+    get:
+      summary: Get a specific poll
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Poll ID
+      responses:
+        '200':
+          description: Successful response
+    put:
+      summary: Update a specific poll
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Poll ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: Successful response
+    delete:
+      summary: Delete a specific poll
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Poll ID
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    Poll:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        question:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+        obj:
+          $ref: '#/components/schemas/Obj'
+        commento:
+          $ref: '#/components/schemas/Comment'
+    Obj:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        caso:
+          type: string
+        utente:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        amici:
+          $ref: '#/components/schemas/Friend'
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time

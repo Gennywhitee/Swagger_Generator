@@ -78,5 +78,6 @@ def process_java_directory(input_dir, output_file):
     return final_cleaned_code  # Restituisco il codice ripulito finale
 
 # utilizzo
-process_java_directory('java_classes', 'output_dipendenze/final_output.java')
+
  
+process_java_directory('java_classes', 'output_dipendenze/final_output.java')

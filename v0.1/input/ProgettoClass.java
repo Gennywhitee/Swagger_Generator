@@ -36,22 +36,17 @@ public class ProgettoClass implements Serializable {
     @JoinColumn(name = "entity_id", nullable = false)
     private EntityClass entityAssociata;
 
-    // Lista di task del progetto (campo complesso)
-    @OneToMany(mappedBy = "progetto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TaskClass> tasks;
-
     // Costruttore vuoto obbligatorio per JPA
     public ProgettoClass() {
     }
 
     // Costruttore con parametri
-    public ProgettoClass(String nome, String descrizione, Date dataInizio, Date dataFine, EntityClass entityAssociata, List<TaskClass> tasks) {
+    public ProgettoClass(String nome, String descrizione, Date dataInizio, Date dataFine, EntityClass entityAssociata) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.entityAssociata = entityAssociata;
-        this.tasks = tasks;
     }
 
     // Getter e setter per i campi
@@ -104,11 +99,4 @@ public class ProgettoClass implements Serializable {
         this.entityAssociata = entityAssociata;
     }
 
-    public List<TaskClass> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskClass> tasks) {
-        this.tasks = tasks;
-    }
 }

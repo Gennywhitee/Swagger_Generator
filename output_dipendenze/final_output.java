@@ -1,14 +1,13 @@
-class Comment{ private Post post;}
+class Comment{}
 
 
-class Post{ private Poll mPoll; private List<Comment> comments; MyObj genny}
+class Friend{}
 
 
-class EntityClass{}
+class Obj{ User utente;}
 
 
-class Poll{}
+class Poll{ Obj mObj; Comment commento;}
 
 
-class ProgettoClass{ private EntityClass entityAssociata; private List<TaskClass> tasks;}
-
+class User{ Friend amici;}
