@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from  IO_function import *
-from  swagger_generator import *
 
 # Funzione per ottenere il contenuto di una pagina web
 def get_webpage_content(url):

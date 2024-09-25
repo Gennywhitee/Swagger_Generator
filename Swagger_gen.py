@@ -33,7 +33,7 @@ def save_merged_class(class_name, merged_text, output_folder):
         file.write(merged_text)
     print(f"File unito salvato: {file_path}")
 
-# Funzione ricorsiva per unire le dipendenze delle dipendenze, evitando duplicazioni
+# Funzione ricorsiva per unire le dipendenze delle dipendenze, evitando duplicazioni tramite Set
 def merge_class_with_dependencies(class_name, class_text, dependencies, folder_path, class_dependencies, merged_classes=None):
     # Inizializza l'insieme delle classi già elaborate se non è fornito
     if merged_classes is None:
@@ -128,7 +128,6 @@ def swagger_generator_from_json(json_file, folder_path, context, output_folder="
         # Unisci tutte le parti YAML generate (in questo caso dovrebbe essere solo una)
         final_yaml = "\n".join(yaml_parts)
         
-        # Salva il file YAML nella cartella di output
         output_file_path = os.path.join(output_folder, f"{class_name}_swagger_output.yaml")
         out_on_file(final_yaml, output_file_path)
         

@@ -5,7 +5,7 @@ from IO_function import *
 # Funzione per trovare e restituire solo le dipendenze dalle relazioni JPA
 def extract_dependencies(java_code):
     
-    # Regex per trovare le relazioni con altre entità (es. @OneToOne, @ManyToOne, etc.)
+    # Regex per trovare le relazioni con altre entità
     dependency_pattern = r'@(OneToOne|OneToMany|ManyToOne|ManyToMany)[^;]*\s+private\s+([\w<>]+)\s+([\w]+);'
     
     # Trova tutte le corrispondenze delle relazioni e dei campi privati nel codice Java
@@ -41,7 +41,7 @@ def clean_java_class(java_code):
             # Se non ci sono dipendenze, restituisco una classe vuota 
             return f'class {class_name}{{}}\n'
     else:
-        # Se non trovo una classe nel file, restituisco un messaggio di errore
+        # Caso in cui nei file non vi è la classe cercata
         return "// Nessuna classe trovata\n"
 
 # Funzione per processare una directory di file Java
@@ -51,9 +51,9 @@ def process_java_directory(input_dir, output_file):
 
     # Scorro ogni file nella directory specificata
     for filename in os.listdir(input_dir):
-        if filename.endswith(".java"):  # Filtro solo i file con estensione .java
-            file_path = os.path.join(input_dir, filename)  # Ottengo il percorso completo del file
-            java_code = text_from_file(file_path)  # Leggo il contenuto del file Java
+        if filename.endswith(".java"):
+            file_path = os.path.join(input_dir, filename)
+            java_code = text_from_file(file_path)
 
             if not java_code:
                 print(f"Il file {filename} è vuoto o non può essere letto.")
@@ -66,18 +66,17 @@ def process_java_directory(input_dir, output_file):
     # Unisco tutto il codice ripulito in un'unica stringa
     final_cleaned_code = "\n\n".join(all_cleaned_code)
 
-    # Scrivo il codice pulito in un unico file di output
     out_on_file(final_cleaned_code, output_file)
 
-    # Messaggio di errore se l'output è vuoto
+    
     if final_cleaned_code.strip() == "":
         print("Errore: il file di output finale è vuoto!")
     else:
-        print("Il file di output contiene dati.")  # Confermo che ci sono dati nell'output
+        print("Il file di output contiene dati.")
 
-    return final_cleaned_code  # Restituisco il codice ripulito finale
+    return final_cleaned_code 
 
-# utilizzo
+
 
  
 process_java_directory('java_classes', 'output_dipendenze/final_output.java')

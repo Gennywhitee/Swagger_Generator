@@ -6,20 +6,11 @@ from  class_cleaner import *
 from  dependecy_function import *
 
 if __name__ == "__main__":
-    url_innested = "https://swagger.io/docs/specification/data-models/inheritance-and-polymorphism/"
-    url_basic = "https://swagger.io/specification/"
+    url = "https://swagger.io/specification/"
     file_in = "./input/Entity_innestate_3.java"
     file_out = "./output/innestate_3_1.yml"
-
-    text = text_from_file(file_in)
-
-    if check_nested_entities(text):
-        url = url_innested  # URL della specifica con innesti
-        context = extract_context_from_webpage(url)  # Estrae il contesto dalla specifica OpenAPI
-        
-    else:
-        url = url_basic  # URL della specifica
-        context = extract_context_from_webpage(url)
+    # Viene estratto il contesto dalla pagina url
+    context = extract_context_from_webpage(url)
 
 
     '''swagger_yaml = swagger_generator(file_in, context)  # Converte la classe Java in YAML
