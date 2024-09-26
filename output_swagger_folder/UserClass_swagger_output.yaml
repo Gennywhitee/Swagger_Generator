@@ -8,13 +8,7 @@ paths:
       summary: Get all users
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+          description: Successful operation
     post:
       summary: Create a new user
       requestBody:
@@ -26,36 +20,25 @@ paths:
       responses:
         '200':
           description: User created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
   /users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        description: ID of the user to retrieve
+        required: true
+        schema:
+          type: integer
     get:
       summary: Get user by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ID of the user to get
-          schema:
-            type: integer
       responses:
         '200':
-          description: Successful response
+          description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
     put:
-      summary: Update user by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ID of the user to update
-          schema:
-            type: integer
+      summary: Update user
       requestBody:
         required: true
         content:
@@ -65,19 +48,8 @@ paths:
       responses:
         '200':
           description: User updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
     delete:
-      summary: Delete user by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: ID of the user to delete
-          schema:
-            type: integer
+      summary: Delete user
       responses:
         '200':
           description: User deleted successfully

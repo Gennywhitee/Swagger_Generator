@@ -20,28 +20,28 @@ paths:
       responses:
         '200':
           description: Successful response
-  /polls/{id}:
+  /polls/{pollId}:
     get:
       summary: Get a specific poll
       parameters:
-        - name: id
+        - name: pollId
           in: path
           required: true
           schema:
             type: integer
-          description: Poll ID
+          description: ID of the poll to get
       responses:
         '200':
           description: Successful response
     put:
       summary: Update a specific poll
       parameters:
-        - name: id
+        - name: pollId
           in: path
           required: true
           schema:
             type: integer
-          description: Poll ID
+          description: ID of the poll to update
       requestBody:
         required: true
         content:
@@ -54,12 +54,12 @@ paths:
     delete:
       summary: Delete a specific poll
       parameters:
-        - name: id
+        - name: pollId
           in: path
           required: true
           schema:
             type: integer
-          description: Poll ID
+          description: ID of the poll to delete
       responses:
         '200':
           description: Successful response

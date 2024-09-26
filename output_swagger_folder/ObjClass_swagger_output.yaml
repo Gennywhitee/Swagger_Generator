@@ -8,13 +8,7 @@ paths:
       summary: Get all Obj entities
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Obj'
+          description: Successful operation
     post:
       summary: Create a new Obj entity
       requestBody:
@@ -22,38 +16,35 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Obj'
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                content:
+                  type: string
+                caso:
+                  type: string
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Obj'
+          description: Successful operation
   /obj/{id}:
     get:
-      summary: Get a specific Obj entity by ID
+      summary: Get a specific Obj entity
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
-          description: ID of the Obj entity to retrieve
           schema:
             type: integer
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Obj'
+          description: Successful operation
     put:
-      summary: Update a specific Obj entity by ID
+      summary: Update a specific Obj entity
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
-          description: ID of the Obj entity to update
           schema:
             type: integer
       requestBody:
@@ -61,58 +52,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Obj'
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                content:
+                  type: string
+                caso:
+                  type: string
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Obj'
+          description: Successful operation
     delete:
-      summary: Delete a specific Obj entity by ID
+      summary: Delete a specific Obj entity
       parameters:
-        - name: id
-          in: path
+        - in: path
+          name: id
           required: true
-          description: ID of the Obj entity to delete
           schema:
             type: integer
       responses:
         '200':
-          description: Successful response
-components:
-  schemas:
-    Obj:
-      type: object
-      properties:
-        mId:
-          type: integer
-        mUserId:
-          type: integer
-        mContent:
-          type: string
-        mCaso:
-          type: string
-        utente:
-          $ref: '#/components/schemas/User'
-    User:
-      type: object
-      properties:
-        mUserId:
-          type: integer
-        mIsRepost:
-          type: boolean
-        mDateCreated:
-          type: string
-        amici:
-          $ref: '#/components/schemas/Friend'
-    Friend:
-      type: object
-      properties:
-        mUserId:
-          type: integer
-        mIsRepost:
-          type: boolean
-        mDateCreated:
-          type: string
+          description: Successful operation

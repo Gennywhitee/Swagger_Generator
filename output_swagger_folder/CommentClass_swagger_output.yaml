@@ -9,6 +9,12 @@ paths:
       responses:
         '200':
           description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
     post:
       summary: Create a new comment
       requestBody:
@@ -16,57 +22,62 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-                content:
-                  type: string
+              $ref: '#/components/schemas/Comment'
       responses:
-        '201':
+        '200':
           description: Comment created successfully
-    /{id}:
-      get:
-        summary: Get a specific comment
-        parameters:
-          - name: id
-            in: path
-            required: true
-            schema:
-              type: integer
-        responses:
-          '200':
-            description: A specific comment
-      put:
-        summary: Update a specific comment
-        parameters:
-          - name: id
-            in: path
-            required: true
-            schema:
-              type: integer
-        requestBody:
-          required: true
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  userId:
-                    type: integer
-                  content:
-                    type: string
-        responses:
-          '200':
-            description: Comment updated successfully
-      delete:
-        summary: Delete a specific comment
-        parameters:
-          - name: id
-            in: path
-            required: true
+                $ref: '#/components/schemas/Comment'
+  /comments/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: ID of the comment
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a comment by ID
+      responses:
+        '200':
+          description: A single comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    put:
+      summary: Update a comment by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
             schema:
-              type: integer
-        responses:
-          '204':
-            description: Comment deleted successfully
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Comment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      summary: Delete a comment by ID
+      responses:
+        '200':
+          description: Comment deleted successfully
+components:
+  schemas:
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        content:
+          type: string
+        date_created:
+          type: string
+          format: date-time

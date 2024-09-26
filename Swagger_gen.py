@@ -108,10 +108,8 @@ def swagger_generator_from_json(json_file, folder_path, context, output_folder="
         else:
             merged_text = main_class_text  # Se non ha dipendenze, il testo rimane solo quello della classe principale
         
-        # Inizializza la lista per raccogliere le parti YAML
-        yaml_parts = []
+       
         
-        # Non dividere il testo in chunk, passare l'intero merged_text al prompt
         prompt = ChatPromptTemplate.from_template(
             "Genera **esclusivamente** la documentazione Swagger seguendo lo standard OpenAPI 3.0 per il seguente entity bean in Java: {text}. "
             "Crea i metodi CRUD necessari, formattati correttamente in YAML, e non includere **nessun** testo che non faccia parte della documentazione Swagger. "
@@ -123,13 +121,10 @@ def swagger_generator_from_json(json_file, folder_path, context, output_folder="
         # Invoca il modello per generare lo YAML
         chain = prompt | llm | output_parser
         response = chain.invoke({"text": merged_text, "context": context})
-        yaml_parts.append(response)
         
-        # Unisci tutte le parti YAML generate (in questo caso dovrebbe essere solo una)
-        final_yaml = "\n".join(yaml_parts)
         
         output_file_path = os.path.join(output_folder, f"{class_name}_swagger_output.yaml")
-        out_on_file(final_yaml, output_file_path)
+        out_on_file(response, output_file_path)
         
         print(f"Swagger YAML per {class_name} (con dipendenze) generato e salvato in {output_file_path}.")
     

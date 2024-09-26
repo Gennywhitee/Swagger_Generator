@@ -8,7 +8,13 @@ paths:
       summary: Get all friends
       responses:
         '200':
-          description: Successful response
+          description: A list of friends
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Friend'
     post:
       summary: Add a new friend
       requestBody:
@@ -16,35 +22,33 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-                  format: date
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
           description: Friend added successfully
   /friends/{userId}:
     get:
-      summary: Get friend by user ID
+      summary: Get a friend by user ID
       parameters:
         - name: userId
           in: path
+          description: ID of the friend to get
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: Successful response
+          description: A single friend
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Friend'
     put:
-      summary: Update friend by user ID
+      summary: Update a friend
       parameters:
         - name: userId
           in: path
+          description: ID of the friend to update
           required: true
           schema:
             type: integer
@@ -53,24 +57,31 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-                  format: date
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
           description: Friend updated successfully
     delete:
-      summary: Delete friend by user ID
+      summary: Delete a friend
       parameters:
         - name: userId
           in: path
+          description: ID of the friend to delete
           required: true
           schema:
             type: integer
       responses:
         '200':
           description: Friend deleted successfully
+components:
+  schemas:
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time

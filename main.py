@@ -1,6 +1,5 @@
 from  IO_function import *
 from  web_function import *
-from  swagger_generator import *
 from  Swagger_gen import *
 from  class_cleaner import *
 from  dependecy_function import *
