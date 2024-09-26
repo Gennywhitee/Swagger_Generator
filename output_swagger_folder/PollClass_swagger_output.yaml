@@ -1,3 +1,4 @@
+```yaml
 openapi: 3.0.0
 info:
   title: Poll API
@@ -20,28 +21,28 @@ paths:
       responses:
         '200':
           description: Successful response
-  /polls/{pollId}:
+  /polls/{id}:
     get:
-      summary: Get a specific poll
+      summary: Get a poll by ID
       parameters:
-        - name: pollId
+        - name: id
           in: path
           required: true
           schema:
             type: integer
-          description: ID of the poll to get
+          description: Poll ID
       responses:
         '200':
           description: Successful response
     put:
-      summary: Update a specific poll
+      summary: Update a poll by ID
       parameters:
-        - name: pollId
+        - name: id
           in: path
           required: true
           schema:
             type: integer
-          description: ID of the poll to update
+          description: Poll ID
       requestBody:
         required: true
         content:
@@ -52,14 +53,14 @@ paths:
         '200':
           description: Successful response
     delete:
-      summary: Delete a specific poll
+      summary: Delete a poll by ID
       parameters:
-        - name: pollId
+        - name: id
           in: path
           required: true
           schema:
             type: integer
-          description: ID of the poll to delete
+          description: Poll ID
       responses:
         '200':
           description: Successful response
@@ -128,3 +129,4 @@ components:
         dateCreated:
           type: string
           format: date-time
+```

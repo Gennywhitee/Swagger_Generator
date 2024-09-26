@@ -4,8 +4,6 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from IO_function import *
-from web_function import *
-from yaml_control import *
 
 # Funzione per leggere il file JSON con le dipendenze
 def load_class_dependencies(json_file):
@@ -77,7 +75,7 @@ def merge_class_with_dependencies(class_name, class_text, dependencies, folder_p
 
 
 # Funzione principale per generare la documentazione Swagger e salvarla
-def swagger_generator_from_json(json_file, folder_path, context, output_folder="swagger_output"):
+def swagger_generator_from_json(json_file, folder_path, output_folder="swagger_output"):
     # Carica le dipendenze delle classi dal file JSON
     class_dependencies = load_class_dependencies(json_file)
     
@@ -114,13 +112,13 @@ def swagger_generator_from_json(json_file, folder_path, context, output_folder="
             "Genera **esclusivamente** la documentazione Swagger seguendo lo standard OpenAPI 3.0 per il seguente entity bean in Java: {text}. "
             "Crea i metodi CRUD necessari, formattati correttamente in YAML, e non includere **nessun** testo che non faccia parte della documentazione Swagger. "
             "Non includere commenti, spiegazioni o descrizioni aggiuntive. "
-            "La documentazione deve essere conforme alle regole dello standard che trovi qui: {context}. "
+            "La documentazione deve essere conforme alle regole dello standard OpenAPI 3.0. "
             "IMPORTANTE: L'output deve essere puramente YAML, senza altri contenuti extra."
         )
         
         # Invoca il modello per generare lo YAML
         chain = prompt | llm | output_parser
-        response = chain.invoke({"text": merged_text, "context": context})
+        response = chain.invoke({"text": merged_text})
         
         
         output_file_path = os.path.join(output_folder, f"{class_name}_swagger_output.yaml")

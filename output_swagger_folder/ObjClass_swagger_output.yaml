@@ -8,7 +8,7 @@ paths:
       summary: Get all Obj entities
       responses:
         '200':
-          description: Successful operation
+          description: OK
     post:
       summary: Create a new Obj entity
       requestBody:
@@ -18,32 +18,32 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
+                mUserId:
                   type: integer
-                content:
+                mContent:
                   type: string
-                caso:
+                mCaso:
                   type: string
       responses:
         '200':
-          description: Successful operation
+          description: OK
   /obj/{id}:
     get:
       summary: Get a specific Obj entity
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: Successful operation
+          description: OK
     put:
       summary: Update a specific Obj entity
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
@@ -54,23 +54,23 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
+                mUserId:
                   type: integer
-                content:
+                mContent:
                   type: string
-                caso:
+                mCaso:
                   type: string
       responses:
         '200':
-          description: Successful operation
+          description: OK
     delete:
       summary: Delete a specific Obj entity
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: Successful operation
+          description: OK
