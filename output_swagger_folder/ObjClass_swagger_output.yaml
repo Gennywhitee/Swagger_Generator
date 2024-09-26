@@ -5,72 +5,88 @@ info:
 paths:
   /obj:
     get:
-      summary: Get all Obj entities
+      summary: Get all Obj
       responses:
         '200':
           description: OK
     post:
-      summary: Create a new Obj entity
+      summary: Create a new Obj
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                mUserId:
-                  type: integer
-                mContent:
-                  type: string
-                mCaso:
-                  type: string
+              $ref: '#/components/schemas/Obj'
       responses:
         '200':
           description: OK
-  /obj/{id}:
-    get:
-      summary: Get a specific Obj entity
+    /{id}:
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: integer
-      responses:
-        '200':
-          description: OK
-    put:
-      summary: Update a specific Obj entity
-      parameters:
-        - name: id
-          in: path
+          description: Obj ID
+      get:
+        summary: Get Obj by ID
+        responses:
+          '200':
+            description: OK
+          '404':
+            description: Obj not found
+      put:
+        summary: Update Obj
+        requestBody:
           required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Obj'
+        responses:
+          '200':
+            description: OK
+          '404':
+            description: Obj not found
+      delete:
+        summary: Delete Obj
+        responses:
+          '200':
+            description: OK
+          '404':
+            description: Obj not found
+components:
+  schemas:
+    Obj:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
         content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                mUserId:
-                  type: integer
-                mContent:
-                  type: string
-                mCaso:
-                  type: string
-      responses:
-        '200':
-          description: OK
-    delete:
-      summary: Delete a specific Obj entity
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: OK
+          type: string
+        caso:
+          type: string
+        utente:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        is_repost:
+          type: boolean
+        date_created:
+          type: string
+        amici:
+          $ref: '#/components/schemas/Friend'
+    Friend:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        is_repost:
+          type: boolean
+        date_created:
+          type: string

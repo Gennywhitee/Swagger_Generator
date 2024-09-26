@@ -8,7 +8,7 @@ paths:
       summary: Get all friends
       responses:
         '200':
-          description: OK
+          description: Successful operation
     post:
       summary: Add a new friend
       requestBody:
@@ -26,14 +26,28 @@ paths:
                   type: string
                   format: date
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Friend added successfully
+  /friends/{userId}:
+    get:
+      summary: Get friend by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID of the friend to get
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
     put:
       summary: Update a friend
       parameters:
         - name: userId
           in: path
           required: true
+          description: ID of the friend to update
           schema:
             type: integer
       requestBody:
@@ -50,15 +64,16 @@ paths:
                   format: date
       responses:
         '200':
-          description: OK
+          description: Friend updated successfully
     delete:
       summary: Delete a friend
       parameters:
         - name: userId
           in: path
           required: true
+          description: ID of the friend to delete
           schema:
             type: integer
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: Friend deleted successfully

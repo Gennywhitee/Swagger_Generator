@@ -9,7 +9,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 input_file = "./output_dipendenze/final_output.java"
 # raw_dependecies è il file in java delle dipendenze restituito dalla funzione class_cleaner.py
-raw_dependencies = text_from_file(input_file);
+raw_dependencies = text_from_file(input_file)
 
 # Carichiamo il file env del progetto 
 load_dotenv()
@@ -41,6 +41,3 @@ def getJSONDependecies(raw_dependecies):
 
    return dependecyJson
     
-
-if __name__ == "__main__":
-   jsonFile = getJSONDependecies(raw_dependencies)
