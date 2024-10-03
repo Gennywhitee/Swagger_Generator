@@ -3,9 +3,11 @@ from  Swagger_gen import *
 from  class_cleaner import *
 from  dependecy_function import *
 from  change_names import *
+from removeAllFile import*
 
-if __name__ == "__main__":
+def startapp():
 
+    remove_files_and_folders()
     input_directory = "java_classes"
     change_names_by_folder(input_directory) # Modifica delle variabili 
 

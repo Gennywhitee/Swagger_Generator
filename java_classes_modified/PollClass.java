@@ -5,24 +5,24 @@ public class Poll implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private long mId;
+    private long pollId;
 
     @Column(name="user_id")
-    private long mUserId;
+    private long userId;
 
     @Column(name="question")
-    private String mQuestion;
+    private String question;
 
     @Column(name="date_created")
-    private Date mDateCreated;
+    private Date dateCreated;
     
     @OneToOne
     @JoinColumn(name="Obj_id")
-    private Obj mObj;
+    private Obj obj;
 
     @OneToOne
     @JoinColumn(name="comment")
-    private Comment commento;
-
+    private Comment comment;
 
 }
+

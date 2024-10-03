@@ -1,0 +1,13 @@
+{
+  "CommentClass": {},
+  "ObjClass": {
+    "User": "UserClass"
+  },
+  "PollClass": {
+    "Obj": "ObjClass",
+    "Comment": "CommentClass"
+  },
+  "UserClass": {
+    "Friend": "FriendClass"
+  }
+}

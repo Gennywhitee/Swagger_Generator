@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Comment API
+  version: 1.0.0
+paths:
+  /comments:
+    get:
+      summary: Retrieve all comments
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                content:
+                  type: string
+              required:
+                - userId
+                - content
+      responses:
+        '201':
+          description: Created
+  /comments/{commentId}:
+    parameters:
+      - name: commentId
+        in: path
+        description: ID of the comment to retrieve
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Retrieve a specific comment
+      responses:
+        '200':
+          description: OK
+    put:
+      summary: Update a specific comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                content:
+                  type: string
+              required:
+                - userId
+                - content
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete a specific comment
+      responses:
+        '204':
+          description: No Content

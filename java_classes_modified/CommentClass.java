@@ -5,15 +5,16 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private long mId;
+    private long commentId;
 
     @Column(name="user_id")
-    private long mUserId;
+    private long userId;
 
     @Column(name="content")
-    private String mContent;
+    private String content;
 
     @Column(name="date_created")
-    private Date mDateCreated;
+    private Date dateCreated;
 
 }
+

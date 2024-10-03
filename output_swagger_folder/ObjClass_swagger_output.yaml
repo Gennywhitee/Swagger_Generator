@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Obj API
+  version: 1.0.0
+paths:
+  /obj:
+    get:
+      summary: Get all objs
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Obj'
+    post:
+      summary: Create a new obj
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Obj'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Obj'
+  /obj/{objId}:
+    get:
+      summary: Get obj by ID
+      parameters:
+        - name: objId
+          in: path
+          description: ID of the obj to get
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Obj'
+    put:
+      summary: Update an existing obj
+      parameters:
+        - name: objId
+          in: path
+          description: ID of the obj to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Obj'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Obj'
+    delete:
+      summary: Delete an obj
+      parameters:
+        - name: objId
+          in: path
+          description: ID of the obj to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+components:
+  schemas:
+    Obj:
+      type: object
+      properties:
+        objId:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        case:
+          type: string
+        user:
+          type: object
+          properties:
+            userId:
+              type: integer

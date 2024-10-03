@@ -20,6 +20,3 @@ def remove_files_and_folders():
         else:
             print(f"Il path non esiste: {path}")
 
-
-if __name__ == "__main__":
-   remove_files_and_folders()

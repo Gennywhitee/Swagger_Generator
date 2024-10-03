@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: Poll API
+  version: 1.0.0
+paths:
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                question:
+                  type: string
+                dateCreated:
+                  type: string
+                  format: date
+                obj:
+                  type: object
+                comment:
+                  type: object
+      responses:
+        '201':
+          description: Poll created successfully
+  /polls/{pollId}:
+    get:
+      summary: Get a specific poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to get
+      responses:
+        '200':
+          description: Successful response
+    put:
+      summary: Update a poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                question:
+                  type: string
+                dateCreated:
+                  type: string
+                  format: date
+                obj:
+                  type: object
+                comment:
+                  type: object
+      responses:
+        '200':
+          description: Poll updated successfully
+    delete:
+      summary: Delete a poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the poll to delete
+      responses:
+        '204':
+          description: Poll deleted successfully

@@ -77,6 +77,3 @@ def clean_java_directory(input_dir, output_file):
     return final_cleaned_code 
 
 
-
- 
-clean_java_directory('java_classes', 'output_dipendenze/final_output.java')

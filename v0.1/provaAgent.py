@@ -8,7 +8,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts import PromptTemplate
-from main import text_from_file, out_on_file
+from app import text_from_file, out_on_file
 
 from langchain.agents.output_parsers import OpenAIFunctionsAgentOutputParser
 from langchain_core.prompts import HumanMessagePromptTemplate
