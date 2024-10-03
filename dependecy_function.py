@@ -7,10 +7,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.output_parsers import StrOutputParser
 
 
-input_file = "./output_dipendenze/final_output.java"
-# raw_dependecies è il file in java delle dipendenze restituito dalla funzione class_cleaner.py
-raw_dependencies = text_from_file(input_file)
-
 # Carichiamo il file env del progetto 
 load_dotenv()
 
@@ -18,7 +14,8 @@ load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # Dato un file di dipendenze in Java, trasforma tutto in un dependecy tree in formato JSON
-def getJSONDependecies(raw_dependecies):
+def getJSONDependecies(input_file):
+   raw_dependencies = text_from_file(input_file)
 
    # Inizializza il modello LLM con il modello specificato e la "creatività"
    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.5)

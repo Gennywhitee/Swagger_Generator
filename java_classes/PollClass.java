@@ -11,14 +11,14 @@ public class Poll implements Serializable {
     private long mUserId;
 
     @Column(name="question")
-    private String mQuestion;
+    private String m_domanda;
 
     @Column(name="date_created")
-    private Date mDateCreated;
+    private Date data_creazione;
     
     @OneToOne
     @JoinColumn(name="Obj_id")
-    private Obj mObj;
+    private Obj id_oggetto;
 
     @OneToOne
     @JoinColumn(name="comment")

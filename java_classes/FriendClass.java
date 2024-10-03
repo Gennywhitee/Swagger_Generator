@@ -7,7 +7,7 @@ public class Friend implements Serializable {
     private long mUserId;
 
     @Column(name="is_repost")
-    private boolean mIsRepost;
+    private boolean m_repost;
 
     @Column(name="date_created")
     private Date mDateCreated;

@@ -11,9 +11,9 @@ public class Comment implements Serializable {
     private long mUserId;
 
     @Column(name="content")
-    private String mContent;
+    private String m_commento;
 
     @Column(name="date_created")
-    private Date mDateCreated;
+    private Date m_d_creata;
 
 }

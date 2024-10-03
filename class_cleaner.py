@@ -45,7 +45,7 @@ def clean_java_class(java_code):
         return "// Nessuna classe trovata\n"
 
 # Funzione per processare una directory di file Java
-def process_java_directory(input_dir, output_file):
+def clean_java_directory(input_dir, output_file):
 
     all_cleaned_code = []  # Lista per memorizzare il codice ripulito di ogni file
 
@@ -79,4 +79,4 @@ def process_java_directory(input_dir, output_file):
 
 
  
-process_java_directory('java_classes', 'output_dipendenze/final_output.java')
+clean_java_directory('java_classes', 'output_dipendenze/final_output.java')
