@@ -13,5 +13,5 @@ def uploadfiles():
 
     return {"message": "File ricevuti correttamente."}, 200
 
-if __name__ == '__main':
+if __name__ == '__main__':  # Corretto: aggiungi il secondo trattino basso
     app.run(host='0.0.0.0', port=5000)
