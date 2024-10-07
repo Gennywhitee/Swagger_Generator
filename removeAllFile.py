@@ -2,6 +2,10 @@ import os
 import shutil
 
 def remove_files_only_in_folders():
+    file_to_remove = './output_swagger_folder.zip'
+    if os.path.exists(file_to_remove) and os.path.isfile(file_to_remove):
+        os.remove(file_to_remove)
+        
     paths_to_clean = [
         './output_swagger_folder',  # Cartella
         './output_dipendenze',      # Cartella
@@ -24,5 +28,3 @@ def remove_files_only_in_folders():
             print(f"Pulizia completata nella cartella: {folder_path}")
         else:
             print(f"Il path non esiste o non è una cartella: {folder_path}")
-
-# Esegui la funzione

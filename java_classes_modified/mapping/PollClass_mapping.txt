@@ -1,6 +1,0 @@
-mId -> pollId
-mUserId -> userId
-mQuestion -> question
-mDateCreated -> dateCreated
-mObj -> obj
-commento -> comment

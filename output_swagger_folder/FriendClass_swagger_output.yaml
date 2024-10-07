@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
-  title: Obj API
+  title: Friend API
   version: 1.0.0
 paths:
-  /obj:
+  /friend:
     get:
-      summary: Get all objs
+      summary: Get all friends
       responses:
         '200':
           description: Successful operation
@@ -14,29 +14,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Obj'
+                  $ref: '#/components/schemas/Friend'
     post:
-      summary: Create a new obj
+      summary: Add a new friend
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Obj'
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
-          description: Successful operation
+          description: Friend created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Obj'
-  /obj/{objId}:
+                $ref: '#/components/schemas/Friend'
+  /friend/{userId}:
     get:
-      summary: Get obj by ID
+      summary: Get friend by userId
       parameters:
-        - name: objId
+        - name: userId
           in: path
-          description: ID of the obj to get
           required: true
           schema:
             type: integer
@@ -46,13 +45,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Obj'
+                $ref: '#/components/schemas/Friend'
     put:
-      summary: Update an existing obj
+      summary: Update an existing friend
       parameters:
-        - name: objId
+        - name: userId
           in: path
-          description: ID of the obj to update
           required: true
           schema:
             type: integer
@@ -61,41 +59,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Obj'
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
-          description: Successful operation
+          description: Friend updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Obj'
+                $ref: '#/components/schemas/Friend'
     delete:
-      summary: Delete an obj
+      summary: Delete a friend
       parameters:
-        - name: objId
+        - name: userId
           in: path
-          description: ID of the obj to delete
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: Successful operation
+          description: Friend deleted successfully
 components:
   schemas:
-    Obj:
+    Friend:
       type: object
       properties:
-        objId:
-          type: integer
         userId:
           type: integer
-        content:
+        isRepost:
+          type: boolean
+        dateCreated:
           type: string
-        case:
-          type: string
-        user:
-          type: object
-          properties:
-            userId:
-              type: integer
+          format: date-time

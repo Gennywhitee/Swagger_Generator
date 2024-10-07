@@ -1,4 +1,3 @@
-mId -> commentId
 mUserId -> userId
-mContent -> content
+mIsRepost -> isRepost
 mDateCreated -> dateCreated

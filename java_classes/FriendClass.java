@@ -1,6 +1,6 @@
 @Entity
-@Table(name="user_feed")
-public class User implements Serializable {
+@Table(name="friend")
+public class Friend implements Serializable {
 
     @Id
     @Column(name="user_id")
@@ -12,8 +12,5 @@ public class User implements Serializable {
     @Column(name="date_created")
     private Date mDateCreated;
 
-    @OneToOne
-    @JoinColumn(name="amici")
-    private Friend amici;
 
 }

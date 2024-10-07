@@ -1,4 +1,0 @@
-mUserId -> userId
-mIsRepost -> isRepost
-mDateCreated -> dateCreated
-amici -> friend

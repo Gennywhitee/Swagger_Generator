@@ -1,5 +1,0 @@
-mId -> objId
-mUserId -> userId
-mContent -> content
-mCaso -> case
-utente -> user
