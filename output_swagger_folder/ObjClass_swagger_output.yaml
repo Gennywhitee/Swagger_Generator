@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: Obj API
+  version: 1.0.0
+paths:
+  /obj:
+    get:
+      summary: Get all Obj
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new Obj
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                content:
+                  type: string
+                caso:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+  /obj/{objId}:
+    get:
+      summary: Get Obj by ID
+      parameters:
+        - name: objId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+    put:
+      summary: Update Obj by ID
+      parameters:
+        - name: objId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                content:
+                  type: string
+                caso:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete Obj by ID
+      parameters:
+        - name: objId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+  /user:
+    get:
+      summary: Get all User
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+  /user/{userId}:
+    get:
+      summary: Get User by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+    put:
+      summary: Update User by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete User by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+  /friend:
+    get:
+      summary: Get all Friend
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new Friend
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+  /friend/{userId}:
+    get:
+      summary: Get Friend by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+    put:
+      summary: Update Friend by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+      responses:
+        '200':
+          description: Successful operation
+    delete:
+      summary: Delete Friend by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation

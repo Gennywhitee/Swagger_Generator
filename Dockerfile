@@ -1,12 +1,17 @@
 FROM python:3.9-slim
 
-WORKDIR /app
+WORKDIR /server
 
-COPY requirements.txt .
+COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY . ./
+COPY java_classes/ ./java_classes/
+COPY java_classes_modified/ ./java_classes_modified/
+COPY output_dipendenze/ ./output_dipendenze/
+COPY jsonDependecies/ ./jsonDependecies/
+COPY output_swagger_folder/ ./output_swagger_folder/
 
 EXPOSE 5000
 

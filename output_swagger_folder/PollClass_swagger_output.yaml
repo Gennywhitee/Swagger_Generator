@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Poll API
+  version: 1.0.0
+paths:
+  /polls:
+    get:
+      summary: Get all polls
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new poll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '201':
+          description: Created
+  /polls/{pollId}:
+    get:
+      summary: Get a specific poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Poll not found
+    put:
+      summary: Update a specific poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Poll not found
+    delete:
+      summary: Delete a specific poll
+      parameters:
+        - name: pollId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Poll:
+      type: object
+      properties:
+        pollId:
+          type: integer
+        userId:
+          type: integer
+        question:
+          type: string
+        dateCreated:
+          type: string
+        obj:
+          $ref: '#/components/schemas/Obj'
+        comment:
+          $ref: '#/components/schemas/Comment'
+    Obj:
+      type: object
+      properties:
+        objId:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        caso:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+        friend:
+          $ref: '#/components/schemas/Friend'
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+    Comment:
+      type: object
+      properties:
+        commentId:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        dateCreated:
+          type: string

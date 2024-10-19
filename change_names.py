@@ -98,5 +98,5 @@ def change_names_by_folder(input_directory):
     
     print("Esecuzione Terminata\n")
 
-    
-    
+
+

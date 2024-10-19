@@ -1,0 +1,4 @@
+mId -> commentId
+mUserId -> userId
+mContent -> content
+mDateCreated -> dateCreated

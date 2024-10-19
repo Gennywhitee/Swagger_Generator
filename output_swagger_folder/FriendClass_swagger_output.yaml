@@ -3,18 +3,12 @@ info:
   title: Friend API
   version: 1.0.0
 paths:
-  /friend:
+  /friends:
     get:
       summary: Get all friends
       responses:
         '200':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Friend'
     post:
       summary: Add a new friend
       requestBody:
@@ -22,30 +16,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Friend'
+              type: object
+              properties:
+                userId:
+                  type: integer
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+                  format: date
       responses:
         '200':
-          description: Friend created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Friend'
-  /friend/{userId}:
+          description: Successful operation
+  /friends/{userId}:
     get:
-      summary: Get friend by userId
+      summary: Get friend by ID
       parameters:
         - name: userId
           in: path
           required: true
           schema:
             type: integer
+          description: ID of the friend to get
       responses:
         '200':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Friend'
     put:
       summary: Update an existing friend
       parameters:
@@ -54,19 +49,22 @@ paths:
           required: true
           schema:
             type: integer
+          description: ID of the friend to update
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Friend'
+              type: object
+              properties:
+                isRepost:
+                  type: boolean
+                dateCreated:
+                  type: string
+                  format: date
       responses:
         '200':
-          description: Friend updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Friend'
+          description: Successful operation
     delete:
       summary: Delete a friend
       parameters:
@@ -75,18 +73,7 @@ paths:
           required: true
           schema:
             type: integer
+          description: ID of the friend to delete
       responses:
         '200':
-          description: Friend deleted successfully
-components:
-  schemas:
-    Friend:
-      type: object
-      properties:
-        userId:
-          type: integer
-        isRepost:
-          type: boolean
-        dateCreated:
-          type: string
-          format: date-time
+          description: Successful operation

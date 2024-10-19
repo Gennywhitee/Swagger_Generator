@@ -1,5 +1,17 @@
 {
+  "CommentClass": {
+    "dependencies": []
+  },
   "FriendClass": {
     "dependencies": []
+  },
+  "ObjClass": {
+    "dependencies": ["UserClass"]
+  },
+  "PollClass": {
+    "dependencies": ["ObjClass", "CommentClass"]
+  },
+  "UserClass": {
+    "dependencies": ["FriendClass"]
   }
 }

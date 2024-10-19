@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Comment API
+  version: 1.0.0
+paths:
+  /comments:
+    get:
+      summary: Get all comments
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      summary: Create a new comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Comment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+  /comments/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: ID of the comment
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a specific comment
+      responses:
+        '200':
+          description: A single comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    put:
+      summary: Update a comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Comment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      summary: Delete a comment
+      responses:
+        '200':
+          description: Comment deleted successfully
+components:
+  schemas:
+    Comment:
+      type: object
+      properties:
+        commentId:
+          type: integer
+        userId:
+          type: integer
+        content:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time

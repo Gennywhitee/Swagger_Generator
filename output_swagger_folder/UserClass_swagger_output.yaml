@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: User Feed API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: Successful operation
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+  /users/{userId}:
+    get:
+      summary: Get user by userId
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user to get
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: User not found
+    put:
+      summary: Update an existing user
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: User not found
+    delete:
+      summary: Delete a user
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: User not found
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        friend:
+          $ref: '#/components/schemas/Friend'
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time

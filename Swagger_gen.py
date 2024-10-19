@@ -74,6 +74,14 @@ def merge_class_with_dependencies(class_name, class_text, dependencies, folder_p
     return merged_text
 
 
+# Funzione per rimuovere i delimitatori markdown dal file YAML
+def clean_swagger_output(output_text):
+    if output_text.startswith("```yaml"):
+        # Rimuove il delimitatore iniziale e finale "```"
+        output_text = output_text.replace("```yaml", "").strip()
+        output_text = output_text.replace("```", "").strip()
+    return output_text
+
 # Funzione principale per generare la documentazione Swagger e salvarla
 def swagger_generator_from_json(json_file, folder_path, output_folder="swagger_output"):
     # Carica le dipendenze delle classi dal file JSON
@@ -106,8 +114,6 @@ def swagger_generator_from_json(json_file, folder_path, output_folder="swagger_o
         else:
             merged_text = main_class_text  # Se non ha dipendenze, il testo rimane solo quello della classe principale
         
-       
-        
         prompt = ChatPromptTemplate.from_template(
             "Genera **esclusivamente** la documentazione Swagger seguendo lo standard OpenAPI 3.0 per il seguente entity bean in Java: {text}. "
             "Crea i metodi CRUD necessari, formattati correttamente in YAML, e non includere **nessun** testo che non faccia parte della documentazione Swagger. "
@@ -120,9 +126,16 @@ def swagger_generator_from_json(json_file, folder_path, output_folder="swagger_o
         chain = prompt | llm | output_parser
         response = chain.invoke({"text": merged_text})
         
+        # Pulisci l'output YAML se inizia con "```yaml"
+        cleaned_response = clean_swagger_output(response)
         
+        # Se la risposta includeva "```yaml", rigenera lo Swagger per quel file
+        if response != cleaned_response:
+            print(f"Rimosso '```yaml' dall'output per {class_name}, rigenerando il file.")
+        
+        # Salva l'output pulito
         output_file_path = os.path.join(output_folder, f"{class_name}_swagger_output.yaml")
-        out_on_file(response, output_file_path)
+        out_on_file(cleaned_response, output_file_path)
         
         print(f"Swagger YAML per {class_name} (con dipendenze) generato e salvato in {output_file_path}.")
     
