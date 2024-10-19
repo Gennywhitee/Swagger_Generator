@@ -3,7 +3,7 @@ info:
   title: Friend API
   version: 1.0.0
 paths:
-  /friends:
+  /friend:
     get:
       summary: Get all friends
       responses:
@@ -16,64 +16,66 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-                  format: date
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
-          description: Successful operation
-  /friends/{userId}:
+          description: Friend created successfully
+  /friend/{userId}:
     get:
-      summary: Get friend by ID
+      summary: Get friend by userId
       parameters:
         - name: userId
           in: path
           required: true
+          description: ID of the friend to get
           schema:
             type: integer
-          description: ID of the friend to get
       responses:
         '200':
           description: Successful operation
+        '404':
+          description: Friend not found
     put:
       summary: Update an existing friend
       parameters:
         - name: userId
           in: path
           required: true
+          description: ID of the friend to update
           schema:
             type: integer
-          description: ID of the friend to update
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-                  format: date
+              $ref: '#/components/schemas/Friend'
       responses:
         '200':
-          description: Successful operation
+          description: Friend updated successfully
+        '404':
+          description: Friend not found
     delete:
       summary: Delete a friend
       parameters:
         - name: userId
           in: path
           required: true
+          description: ID of the friend to delete
           schema:
             type: integer
-          description: ID of the friend to delete
       responses:
         '200':
-          description: Successful operation
+          description: Friend deleted successfully
+components:
+  schemas:
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date

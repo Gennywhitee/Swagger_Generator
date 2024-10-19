@@ -31,24 +31,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/Comment'
   /comments/{id}:
-    parameters:
-      - name: id
-        in: path
-        description: ID of the comment
-        required: true
-        schema:
-          type: integer
     get:
       summary: Get a specific comment
+      parameters:
+        - name: id
+          in: path
+          description: ID of the comment to get
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
-          description: A single comment
+          description: The requested comment
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
     put:
       summary: Update a comment
+      parameters:
+        - name: id
+          in: path
+          description: ID of the comment to update
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -64,6 +71,13 @@ paths:
                 $ref: '#/components/schemas/Comment'
     delete:
       summary: Delete a comment
+      parameters:
+        - name: id
+          in: path
+          description: ID of the comment to delete
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Comment deleted successfully

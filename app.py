@@ -4,8 +4,11 @@ from  class_cleaner import *
 from  dependecy_function import *
 from  change_names import *
 from removeAllFile import*
+from rename_class import *
 
 def startapp():
+
+    rinomina_tutti_i_file_in_cartella('java_classes')
 
     input_directory = "java_classes"
     change_names_by_folder(input_directory) # Modifica delle variabili 

@@ -19,10 +19,10 @@ paths:
               $ref: '#/components/schemas/User'
       responses:
         '200':
-          description: Successful operation
+          description: User created successfully
   /users/{userId}:
     get:
-      summary: Get user by userId
+      summary: Get user by ID
       parameters:
         - name: userId
           in: path
@@ -30,14 +30,13 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
           description: Successful operation
         '404':
           description: User not found
     put:
-      summary: Update an existing user
+      summary: Update user by ID
       parameters:
         - name: userId
           in: path
@@ -45,7 +44,6 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -54,11 +52,11 @@ paths:
               $ref: '#/components/schemas/User'
       responses:
         '200':
-          description: Successful operation
+          description: User updated successfully
         '404':
           description: User not found
     delete:
-      summary: Delete a user
+      summary: Delete user by ID
       parameters:
         - name: userId
           in: path
@@ -66,10 +64,9 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
       responses:
         '200':
-          description: Successful operation
+          description: User deleted successfully
         '404':
           description: User not found
 components:
@@ -79,7 +76,6 @@ components:
       properties:
         userId:
           type: integer
-          format: int64
         isRepost:
           type: boolean
         dateCreated:
@@ -92,7 +88,6 @@ components:
       properties:
         userId:
           type: integer
-          format: int64
         isRepost:
           type: boolean
         dateCreated:

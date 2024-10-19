@@ -16,14 +16,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-                content:
-                  type: string
-                caso:
-                  type: string
+              $ref: '#/components/schemas/Obj'
       responses:
         '200':
           description: Successful operation
@@ -33,178 +26,90 @@ paths:
       parameters:
         - name: objId
           in: path
+          description: ID of the Obj to get
           required: true
           schema:
             type: integer
+            format: int64
       responses:
         '200':
           description: Successful operation
+        '404':
+          description: Obj not found
     put:
-      summary: Update Obj by ID
+      summary: Update an existing Obj
       parameters:
         - name: objId
           in: path
+          description: ID of the Obj to update
           required: true
           schema:
             type: integer
+            format: int64
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                userId:
-                  type: integer
-                content:
-                  type: string
-                caso:
-                  type: string
+              $ref: '#/components/schemas/Obj'
       responses:
         '200':
           description: Successful operation
+        '404':
+          description: Obj not found
     delete:
-      summary: Delete Obj by ID
+      summary: Delete an Obj
       parameters:
         - name: objId
           in: path
+          description: ID of the Obj to delete
           required: true
           schema:
             type: integer
+            format: int64
       responses:
         '200':
           description: Successful operation
-  /user:
-    get:
-      summary: Get all User
-      responses:
-        '200':
-          description: Successful operation
-    post:
-      summary: Create a new User
-      requestBody:
-        required: true
+        '404':
+          description: Obj not found
+components:
+  schemas:
+    Obj:
+      type: object
+      properties:
+        objId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
         content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-  /user/{userId}:
-    get:
-      summary: Get User by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-    put:
-      summary: Update User by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-    delete:
-      summary: Delete User by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-  /friend:
-    get:
-      summary: Get all Friend
-      responses:
-        '200':
-          description: Successful operation
-    post:
-      summary: Create a new Friend
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-  /friend/{userId}:
-    get:
-      summary: Get Friend by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
-    put:
-      summary: Update Friend by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                isRepost:
-                  type: boolean
-                dateCreated:
-                  type: string
-      responses:
-        '200':
-          description: Successful operation
-    delete:
-      summary: Delete Friend by ID
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful operation
+          type: string
+        caso:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date
+        friend:
+          $ref: '#/components/schemas/Friend'
+    Friend:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        isRepost:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date

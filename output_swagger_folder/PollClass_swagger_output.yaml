@@ -18,30 +18,30 @@ paths:
             schema:
               $ref: '#/components/schemas/Poll'
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
   /polls/{pollId}:
     get:
-      summary: Get a specific poll
+      summary: Get a poll by ID
       parameters:
         - name: pollId
           in: path
           required: true
           schema:
             type: integer
+          description: ID of the poll to get
       responses:
         '200':
           description: OK
-        '404':
-          description: Poll not found
     put:
-      summary: Update a specific poll
+      summary: Update a poll
       parameters:
         - name: pollId
           in: path
           required: true
           schema:
             type: integer
+          description: ID of the poll to update
       requestBody:
         required: true
         content:
@@ -51,19 +51,18 @@ paths:
       responses:
         '200':
           description: OK
-        '404':
-          description: Poll not found
     delete:
-      summary: Delete a specific poll
+      summary: Delete a poll
       parameters:
         - name: pollId
           in: path
           required: true
           schema:
             type: integer
+          description: ID of the poll to delete
       responses:
-        '204':
-          description: No Content
+        '200':
+          description: OK
 components:
   schemas:
     Poll:
